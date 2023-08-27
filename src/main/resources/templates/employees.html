@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.css">
+    <title>Document</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary" aria-label="Third navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img th:src="@{assets/logo.png}" width="50" height="50" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+            <button type="button" class="btn btn-primary" >
+                <a th:href="@{/addEmployee}" class="text-white">Create Employee</a>
+            </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <a th:href="@{/filter}" class="text-white">filtre</a>
+            </button>
+        </div>
+    </div>
+</nav>
+<main class="container-xxl overflow-auto list-style">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Firstname</th>
+                <th scope="col">Lastname</th>
+                <th scope="col">BirthDate</th>
+                <th scope="col">Sex</th>
+                <th scope="col">address</th>
+                <th scope="col">Email perso</th>
+                <th scope="col">Email pro</th>
+                <th scope="col">Cin number</th>
+                <th scope="col">Cin creation date</th>
+                <th scope="col">Cnaps</th>
+                <th scope="col">Entrance date</th>
+                <th scope="col">Leaving date</th>
+                <th scope="col">phoneNumber</th>
+                <th scope="col">#</th>
+                <th scope="col">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee :${value}">
+                <th scope="row" th:text="${employee.matricule}"></th>
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.birthDate}"></td>
+                <td th:text="${employee.sex}"></td>
+                <td th:text="${employee.address}"></td>
+                <td th:text="${employee.emailPerso}"></td>
+                <td th:text="${employee.emailPro}"></td>
+                <td th:text="${employee.cinNumber}"></td>
+                <td th:text="${employee.cinCreationDate}"></td>
+                <td th:text="${employee.cnaps}"></td>
+                <td th:text="${employee.date_entre}"></td>
+                <td th:text="${employee.date_sortie}"></td>
+                <td th:each="phoneNumber :${employee.phoneNumberList}">
+                    <span>
+                          <span th:text="${phoneNumber.countryCode.code}"/><span th:text="${phoneNumber.value}"/>
+                    </span>
+                </td>
+                <td><a th:href="@{/employee/{matricule}(matricule = ${employee.matricule})}">detail</a></td>
+                <td>
+                    <a th:href="@{/pdf?employee={matricule}(matricule = ${employee.matricule})}">PDF</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+
+</html>

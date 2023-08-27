@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{bootstrap.css}">
+    <title>Document</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark" aria-label="Third navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img th:src="@{~/assets/logo.png}" width="50" height="50" alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+    <div class="container">
+        <form class="col-8 form-search" th:object="${searchEmployee}" th:action="@{/employees}">
+            <label>firstname</label>
+            <input class="form-control input-style" th:field="*{firstName}" type="search" placeholder="Firstname" aria-label="Search">
+            <label>lastname</label>
+            <input class="form-control input-style" th:field="*{lastName}" type="search" placeholder="Lastname" aria-label="Search">
+            <label>birthday</label>
+            <input class="form-control input-style" th:field="*{birthday}" type="date" placeholder="Lastname" aria-label="Search">
+            <label>sex</label>
+            <select class="form-select" th:field="*{sex}" aria-label=".form-select-lg example">
+                <option value="" selected></option>
+                <option th:value="0">Homme</option>
+                <option th:value="1">Femme</option>
+            </select>
+            <label>Entrance date From</label>
+            <input class="form-control input-style" th:field="*{start.from}" type="date" placeholder="Lastname" aria-label="Search">
+            <label>to</label>
+            <input class="form-control input-style" th:field="*{start.to}" type="date" placeholder="Lastname" aria-label="Search">
+            <label>leaving date From</label>
+            <input class="form-control input-style" th:field="*{end.from}" type="date" placeholder="Lastname" aria-label="Search">
+            <label>to</label>
+            <input class="form-control input-style" th:field="*{end.to}" type="date" placeholder="Lastname" aria-label="Search">
+            <label>countryCode</label>
+        <select class="form-select" th:field="*{countryCode}" aria-label=".form-select-lg example">
+            <option value="" selected></option>
+            <tr th:each="code :${codes}">
+                <option th:value="${code}" th:text="${code}"></option>
+            </tr>
+        </select>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+
+</body>
+</html>
